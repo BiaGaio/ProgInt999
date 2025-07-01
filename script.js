@@ -11,9 +11,6 @@ document.getElementById('cep').addEventListener('keydown', function (event) {
               document.getElementById('bairro').value = data.bairro;
               document.getElementById('localidade').value = data.localidade;
               document.getElementById('uf').value = data.uf;
-              document.getElementById('estado').value = data.estado;
-              document.getElementById('regiao').value = data.regiao;
-              document.getElementById('ibge').value = data.ibge;
             } else {
               alert('CEP não encontrado.');
               limparCampos();
@@ -36,9 +33,7 @@ document.getElementById('cep').addEventListener('keydown', function (event) {
     document.getElementById('bairro').value = '';
     document.getElementById('localidade').value = '';
     document.getElementById('uf').value = '';
-    document.getElementById('estado').value = '';
-    document.getElementById('regiao').value = '';
-    document.getElementById('ibge').value = '';
+  
   }
  
   document.getElementById('btnSalvar').addEventListener('click', function () {
