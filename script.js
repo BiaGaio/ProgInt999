@@ -11,6 +11,9 @@ document.getElementById('cep').addEventListener('keydown', function (event) {
               document.getElementById('bairro').value = data.bairro;
               document.getElementById('localidade').value = data.localidade;
               document.getElementById('uf').value = data.uf;
+              document.getElementById('estado').value = data.estado;
+              document.getElementById('regiao').value = data.regiao;
+              document.getElementById('ibge').value = data.ibge;
             } else {
               alert('CEP não encontrado.');
               limparCampos();
@@ -33,5 +36,46 @@ document.getElementById('cep').addEventListener('keydown', function (event) {
     document.getElementById('bairro').value = '';
     document.getElementById('localidade').value = '';
     document.getElementById('uf').value = '';
+    document.getElementById('estado').value = '';
+    document.getElementById('regiao').value = '';
+    document.getElementById('ibge').value = '';
   }
+ 
+  document.getElementById('btnSalvar').addEventListener('click', function () {
+    const nome = document.getElementById('nome').value.trim();
+    const cep = document.getElementById('cep').value.trim();
   
+    if (nome === '' || cep.length !== 8) {
+      alert('Preencha um nome válido e um CEP com 8 dígitos.');
+      return;
+    }
+  
+    localStorage.setItem(nome, cep);
+    alert(`Salvo com sucesso: ${nome} => ${cep}`);
+  });
+  
+  document.getElementById('btnListar').addEventListener('click', listarCEPsSalvos);
+
+function listarCEPsSalvos() {
+  const lista = document.getElementById('listaCeps');
+  lista.innerHTML = ''; 
+
+  if (localStorage.length === 0) {
+    lista.innerHTML = '<p class="text-muted">Nenhum CEP salvo.</p>';
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  ul.classList.add('list-group');
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const nome = localStorage.key(i);
+    const cep = localStorage.getItem(nome);
+    const li = document.createElement('li');
+    li.classList.add('list-group-item');
+    li.textContent = `${nome} → ${cep}`;
+    ul.appendChild(li);
+  }
+
+  lista.appendChild(ul);
+}
